@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">% Change (24 Hrs)</th>
+      <th scope="col">% Change (7 Days)</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for key,value in stream.data.items %}
+	
+	<tr>
+	  <td>{{value.rank}}</td>	
+	  <td>{{value.name}} ({{value.symbol}})</td>
+	  <td>${{value.quotes.USD.price}}</td>
+	  <td>${{value.quotes.USD.percent_change_24h}}</td>
+	  <td>${{value.quotes.USD.percent_change_7d}}</td>
+	  <td>${{value.quotes.USD.market_cap}}</td>
+	</tr>
+
+{% endfor %}
+  </tbody>
+</table>
+
+{%  endblock %}
