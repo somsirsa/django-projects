@@ -25,6 +25,7 @@ def prices(request):
 		quote = quote.upper()
 		crypto_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms="+ quote +"&tsyms=USD")
 		crypto = json.loads(crypto_request.content)
-		return render(request,'prices.html',{'quote': quote, 'crypto': crypto,})
+		return render(request,'prices.html',{'quote': quote, 'crypto': crypto})
 	else:
-		return render(request,'prices.html',{})
+		notfound = "Enter a crypto currency symbol in the form above..."
+		return render(request,'prices.html',{'notfound': notfound})
