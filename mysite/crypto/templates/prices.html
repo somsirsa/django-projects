@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	{{ crypto }}
+	{% if notfound %}
+		{{ notfound }}
+	{% else %}
+
+		{% if crypto.Response %}
+			Sorry, {{ quote }} doesn't exist, please try again!
+		{% endif %}
+
+		{% for key,value in crypto.DISPLAY.items %}
+		
+		<div class="card" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title"><strong>Name: </strong>{{key}}</h5>
+		    <p class="card-text"><strong>Price: </strong>{{value.USD.PRICE}}<br/>
+			<strong>24hr High: </strong>{{value.USD.HIGHDAY}}<br/>
+			<strong>24hr Low: </strong>{{value.USD.LOWDAY}}<br/>
+			<strong>Market Cap: </strong>{{value.USD.MKTCAP}}<br/></p>
+		  </div>
+		</div>
+		<br/><br/>
+		
+		{% endfor %}
+	{% endif %}
 {% endblock %}
